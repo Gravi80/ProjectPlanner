@@ -1,12 +1,12 @@
 apply plugin: 'com.android.application'
 
 android {
-    compileSdkVersion 22
+    compileSdkVersion 22 // SDK version Android uses to compile APP
     buildToolsVersion "21.1.2"
 
     defaultConfig {
-        applicationId "android.bootcamp.projectplanner"
-        minSdkVersion 19
+        applicationId "android.bootcamp.projectplanner"  // App package , need to be unique in playStore
+        minSdkVersion 19 // play store will not show ur app to devices below SDK 19
         targetSdkVersion 22
         versionCode 1
         versionName "1.0"

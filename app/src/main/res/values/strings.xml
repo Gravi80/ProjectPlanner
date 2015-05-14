@@ -6,4 +6,6 @@
   <string name="action_settings">Settings</string>
   <string name="calculate">Calculate</string>
   <string name="iteration_needed">Number of Iterations Needed =</string>
+  <string name="calculate_with_buffer">Iteration Needed With Buffer =</string>
+  <string name="add_buffer">Add Buffer</string>
 </resources>
