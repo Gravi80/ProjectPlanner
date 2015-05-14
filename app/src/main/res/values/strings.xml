@@ -12,4 +12,5 @@
   <string name="buffer">Buffer</string>
   <string name="adjust_for_buffer">Adjust for Buffer</string>
   <string name="capture">Capture</string>
+  <string name="save">Save</string>
 </resources>

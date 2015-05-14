@@ -1,6 +1,7 @@
 package android.bootcamp.projectplanner.storage;
 
 import android.bootcamp.projectplanner.model.Plan;
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
@@ -19,6 +20,7 @@ public class DataStorageManager extends SQLiteOpenHelper {
 
   @Override
   public void onCreate(SQLiteDatabase db) { //create your database
+    db.execSQL("CREATE TABLE "+TABLE_NAME+" ("+ POINTS_COL +" INTEGER, "+ VELOCITY_COL+" INTEGER, " +ITERATIONS_COL+" INTEGER);");
   }
 
   @Override
@@ -27,6 +29,12 @@ public class DataStorageManager extends SQLiteOpenHelper {
 
 
   public void store(Plan plan) { //insert into your database
+    ContentValues contentValues = new ContentValues();
+    contentValues.put(POINTS_COL,plan.getPoints());
+    contentValues.put(VELOCITY_COL,plan.getVelocity());
+    contentValues.put(ITERATIONS_COL,plan.getNumOfIterations());
+
+    getWritableDatabase().insert(TABLE_NAME,null,contentValues);
   }
 
 }

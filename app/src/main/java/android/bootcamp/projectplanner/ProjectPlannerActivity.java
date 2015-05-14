@@ -1,6 +1,7 @@
 package android.bootcamp.projectplanner;
 
 import android.app.Activity;
+import android.bootcamp.projectplanner.repository.ProjectPlanRepository;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -18,6 +19,10 @@ public class ProjectPlannerActivity extends Activity {
 
     private static final int BUFFER_ADJUST_REQUEST_CODE = 3239;
     private int CAPTURE_REQUEST_CODE = 12;
+    private int bufferIteration;
+    private int velocity;
+    private int totalPoints;
+    private ProjectPlanRepository projectPlanRepository;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,8 +31,8 @@ public class ProjectPlannerActivity extends Activity {
     }
 
     public void calculate(View view) {
-        int totalPoints = readTextAsInteger(R.id.number_of_points);
-        int velocity = readTextAsInteger(R.id.velocity);
+        totalPoints = readTextAsInteger(R.id.number_of_points);
+        velocity = readTextAsInteger(R.id.velocity);
         int result = totalPoints / velocity;
         TextView resultView = (TextView) findViewById(R.id.number_of_iterations);
         String resultString = getString(R.string.number_of_iterations) + String.valueOf(result);
@@ -51,8 +56,8 @@ public class ProjectPlannerActivity extends Activity {
             }
         } else {
             if (resultCode == RESULT_OK) {
-                int result = data.getIntExtra(ADJUSTED_ITERATIONS, 0);
-                String resultString = getString(R.string.adjusted_number_of_iterations) + String.valueOf(result);
+                bufferIteration = data.getIntExtra(ADJUSTED_ITERATIONS, 0);
+                String resultString = getString(R.string.adjusted_number_of_iterations) + String.valueOf(bufferIteration);
                 ((TextView) findViewById(R.id.number_of_iterations)).setText(resultString);
             }
         }
@@ -62,5 +67,10 @@ public class ProjectPlannerActivity extends Activity {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         CAPTURE_REQUEST_CODE = 12;
         startActivityForResult(intent, CAPTURE_REQUEST_CODE);
+    }
+
+    public void Save(View view) {
+        projectPlanRepository = new ProjectPlanRepository(this);
+        projectPlanRepository.storePlan(totalPoints, velocity, bufferIteration);
     }
 }
