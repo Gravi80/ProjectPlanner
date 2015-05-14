@@ -1,6 +1,7 @@
 package android.bootcamp.projectplanner;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -17,15 +18,16 @@ public class ProjectPlannerActivity extends Activity {
   }
 
   public void calculate(View view) {
-    TextView number_of_iterations = (TextView) findViewById(R.id.number_of_iterations);
     EditText iterationPoints = (EditText) findViewById(R.id.number_of_points);
     EditText iterationVelocity = (EditText) findViewById(R.id.velocity);
 
     float points = Float.parseFloat(iterationPoints.getText().toString());
     float velocity = Float.parseFloat(iterationVelocity.getText().toString());
-
     Float noOfIteration = points/velocity;
-    number_of_iterations.setText(noOfIteration.toString());
-//    number_of_iterations.setText(R.string.app_name);  to access string const
+
+    Intent intent = new Intent(this, NumberOfIterationActivity.class);
+    intent.putExtra("total_number_of_iterations",noOfIteration);
+    startActivity(intent);
+    //Project Planner Activity will go in stop state
   }
 }

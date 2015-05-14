@@ -12,6 +12,9 @@
         <category android:name="android.intent.category.LAUNCHER"/>
       </intent-filter>
     </activity>
+      <activity
+          android:name=".NumberOfIterationActivity" android:label="@string/title_activity_project_planner">
+      </activity>
   </application>
 
 </manifest>
